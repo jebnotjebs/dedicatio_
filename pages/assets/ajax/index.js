@@ -164,32 +164,34 @@ $(document).on('click', '.img_background', function(e) {
             pos.y <= textY + textHeight / 2;
     }
 
-    // Download the canvas content as an image
     $('#printBtn').click(function() {
-        // Convert the canvas to a data URL
-        const canvasDataUrl = $('#dedicationCanvas')[0].toDataURL('image/png');
-    
-        // Open the image in a new tab
-        const newTab = window.open('');
-        newTab.document.write(`
-            <html>
-                <head>
-                    <title>Print Image</title>
-                    <script>
-                        // Automatically trigger the print dialog when the page loads
-                        window.onload = function() {
-                            window.print();
-                        };
-                    </script>
-                </head>
-                <body style="margin:0; display:flex; align-items:center; justify-content:center; height:100vh;">
-                    <img src="${canvasDataUrl}" style="max-width:100%; max-height:100%;">
-                </body>
-            </html>
-        `);
-        newTab.document.close();
+        // Create a new window for printing the canvas
+        const printWindow = window.open('', '', 'width=800,height=600');
+        printWindow.document.write('<html><head><title></title></head><body>');
+       
+        
+        // Create a new canvas in the print window and copy the current canvas content
+        const printCanvas = printWindow.document.createElement('canvas');
+        printCanvas.width = $('#dedicationCanvas')[0].width;
+        printCanvas.height = $('#dedicationCanvas')[0].height;
+        const printCtx = printCanvas.getContext('2d');
+        
+        // Copy the content of the original canvas to the print canvas
+        printCtx.drawImage($('#dedicationCanvas')[0], 0, 0);
+        
+        // Append the canvas to the print window's body
+        printWindow.document.body.appendChild(printCanvas);
+        
+        // Wait for the print window to load, then trigger the print dialog
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        
+        // Trigger print dialog
+        printWindow.print();
     });
-    
+
+    // Real-time canvas update on user input changes
+    $('#dedicationText, #fontStyle, #fontColor, #fontSize').on('input change', updateCanvas);
     
 });
 
