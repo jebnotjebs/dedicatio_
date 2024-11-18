@@ -1,0 +1,11 @@
+/* Birthstone font */
+@font-face {
+    font-family: 'Birthstone';
+    src: url('../fonts/Birthstone/Birthstone-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.birthstone {
+    font-family: 'Birthstone', cursive;
+}
