@@ -28,6 +28,7 @@
         height: 100vh; /* Full viewport height */
         border-radius: 10px; /* Optional: remove rounded corners */
     }
+  
 
   </style>
 
@@ -274,9 +275,9 @@
             </div> -->
           </div>
 
-          <div class="d-flex justify-content-center mt-2">
+          <div class="d-flex justify-content-center">
             <!-- Canvas for image and text rendering -->
-            <canvas id="dedicationCanvas" width="400" height="300"></canvas>
+            <canvas id="dedicationCanvas" height="336" width="490" ></canvas>
           </div>
 
           <div class="form-group">

@@ -166,9 +166,31 @@ $(document).on('click', '.img_background', function(e) {
 
     $('#printBtn').click(function() {
         // Create a new window for printing the canvas
-        const printWindow = window.open('', '', 'width=800,height=600');
-        printWindow.document.write('<html><head><title></title></head><body>');
-       
+         const printWindow = window.open('', '', 'width=900,height=600');
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Print Preview</title>
+            <style>
+                body, html {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                }
+                canvas {
+                    display: block;
+                    margin: 0;
+                   width: 100%;
+                height: auto;
+                }
+            </style>
+        </head>
+        <body>
+        </body>
+        </html>
+    `);
         
         // Create a new canvas in the print window and copy the current canvas content
         const printCanvas = printWindow.document.createElement('canvas');
